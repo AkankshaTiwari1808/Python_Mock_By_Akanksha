@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -501,7 +500,7 @@
 
         <div class="field">
           <label for="targetRole">Target Role / Company Focus</label>
-          <input type="text" id="targetRole" placeholder="e.g., Senior Software Engineer / Data Scientist">
+          <input type="text" id="targetRole" placeholder="e.g., Software Engineer / Python Developer">
         </div>
 
         <div class="field">
@@ -514,8 +513,8 @@
 
             <button class="track" data-track="Python & Algorithms" onclick="selectTrack(this)">
               <strong>Python & Algorithms</strong>
-              <span>Core language features, data structures, and problem solving. Includes coding practice.</span>
-              <a href="https://colab.research.google.com/drive/1Rnn-rusQLB-1YVbPYLtmLZ3gFsyO_LGx?usp=sharing" target="_blank" class="colab-link" onclick="event.stopPropagation()">🔗 Open Colab Workbook</a>
+              <span>Core algorithms, coding challenges, and data structures.</span>
+              <a href="https://colab.research.google.com/drive/1h4gRYYdquTGVTixODGTna6UKvRe_HKO3?usp=drive_link" target="_blank" class="colab-link" onclick="event.stopPropagation()">🔗 Open Python Colab Workbook</a>
             </button>
 
             <button class="track" data-track="Generative AI & LLMs" onclick="selectTrack(this)">
@@ -759,29 +758,29 @@
       ],
       "Python & Algorithms": [
         {
-          title: "Write a Python function to find the first non-repeating character in a string and explain its time complexity.",
-          hint: "Referencing Colab workbook concepts: Use a frequency counting dictionary or collections.Counter.",
-          followUp: "What is the time and space complexity of your approach?"
+          title: "Write a Python function to solve the Two Sum problem: given an array of integers and a target sum, return indices of the two numbers.",
+          hint: "Colab Practice: Use a hash map to keep track of seen numbers and their indices for $O(n)$ time complexity.",
+          followUp: "What is the space complexity of your hash map solution?"
         },
         {
-          title: "How would you move all zeros to the end of a list in-place while maintaining the relative order of non-zero elements?",
-          hint: "Practice problem from Colab workbook: Use a two-pointer approach or position index tracker.",
-          followUp: "How does this algorithm optimize memory overhead compared to creating a secondary list?"
+          title: "Implement a function to check if a string of parentheses ('(', ')', '{', '}', '[', ']') is valid.",
+          hint: "Colab Practice: Utilize a stack data structure to verify matching opening and closing brackets.",
+          followUp: "How does your code handle unclosed opening brackets at the end of the string?"
         },
         {
-          title: "Write a Python function to check if two given strings are valid anagrams without utilizing built-in sort functions.",
-          hint: "Colab problem: Use a character count dictionary tracker to compare frequencies.",
-          followUp: "How would your solution behave if the strings contained Unicode or uppercase characters?"
+          title: "Write a Python function to reverse a singly linked list iteratively.",
+          hint: "Colab Practice: Track previous, current, and next pointer variables while traversing the nodes.",
+          followUp: "Can this problem be solved recursively? What are the call stack trade-offs?"
         },
         {
-          title: "Explain how Python manages memory through reference counting and garbage collection.",
-          hint: "Mention the role of sys.getrefcount() and the cyclic garbage collector (gc module).",
-          followUp: "How can circular references cause memory leaks in long-running Python services?"
+          title: "Write a Python implementation of Binary Search on a sorted list of integers.",
+          hint: "Colab Practice: Maintain low and high pointers, calculate mid-index, and adjust search boundaries.",
+          followUp: "What precondition must be met by the input array for binary search to work correctly?"
         },
         {
-          title: "How do dictionary lookups achieve O(1) average time complexity in Python?",
-          hint: "Discuss hash functions, hash tables, and collision resolution techniques.",
-          followUp: "What happens to time complexity in the worst-case collision scenario?"
+          title: "Write a Python function to merge two sorted linked lists into a single sorted linked list.",
+          hint: "Colab Practice: Use a dummy head node and compare values from both lists iteratively.",
+          followUp: "What is the overall time and space complexity of merging two lists of lengths $m$ and $n$?"
         }
       ],
       "Generative AI & LLMs": [
@@ -1086,7 +1085,7 @@
           </div>
           <div class="history-score"><strong>${item.score}%</strong></div>
         `;
-        historyListEl.issuerHTML ? null : historyListEl.appendChild(div);
+        historyListEl.appendChild(div);
       });
     }
 
@@ -1114,5 +1113,3 @@
   </script>
 </body>
 </html>
-
-```
