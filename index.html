@@ -1,404 +1,724 @@
 ```html
-                    <strong>Data Analysis</strong>
-                    <span>SQL, data cleaning, metrics, and business insights.</span>
-
-                  </button>
-
-
-                  <button
-                    class="track"
-                    data-track="Python & Algorithms"
-                    onclick="selectTrack(this)"
-                  >
-
-                    <strong>Python & Algorithms</strong>
-                    <span>Core language features, data structures, and problem solving.</span>
-
-                  </button>
-
-
-                  <button
-                    class="track"
-                    data-track="Generative AI & LLMs"
-                    onclick="selectTrack(this)"
-                  >
-
-                    <strong>Generative AI & LLMs</strong>
-                    <span>Prompt engineering, RAG, fine-tuning, and applications.</span>
-
-                  </button>
-
-                </div>
-
-              </div>
-
-
-
-              <div class="field">
-
-                <label for="questionCount">
-                  Number of questions
-                </label>
-
-                <select id="questionCount">
-                  <option value="3">3 Questions (Quick)</option>
-                  <option value="5" selected>5 Questions (Standard)</option>
-                  <option value="8">8 Questions (Deep Dive)</option>
-                </select>
-
-              </div>
-
-
-
-              <div class="field">
-
-                <label for="timePerQuestion">
-                  Time per question
-                </label>
-
-                <select id="timePerQuestion">
-                  <option value="60">1 Minute</option>
-                  <option value="120" selected>2 Minutes</option>
-                  <option value="180">3 Minutes</option>
-                </select>
-
-              </div>
-
-            </div>
-
-
-
-            <div class="setup-footer">
-
-              <div class="interview-rules">
-                • Answer each question thoughtfully within the time limit.<br>
-                • Get immediate feedback and performance scores upon completion.
-              </div>
-
-
-              <button
-                class="btn btn-primary"
-                onclick="startInterview()"
-              >
-                Start Interview Session →
-              </button>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- =================================================
-               INTERVIEW SCREEN (HIDDEN BY DEFAULT)
-          ================================================== -->
-
-          <div
-            class="interview hidden"
-            id="interviewScreen"
-          >
-
-            <div class="interview-top">
-
-              <div>
-
-                <div class="progress-info">
-                  <span id="progressText">Question 1 of 5</span>
-                  <span id="progressPercent">20%</span>
-                </div>
-
-                <div class="progress">
-                  <div
-                    class="progress-bar"
-                    id="progressBar"
-                  ></div>
-                </div>
-
-              </div>
-
-
-              <div
-                class="timer"
-                id="timerBox"
-              >
-                <small>Time Remaining</small>
-                <strong id="timerText">02:00</strong>
-              </div>
-
-            </div>
-
-
-
-            <div
-              class="question-dots"
-              id="questionDots"
-            ></div>
-
-
-
-            <div class="question-card">
-
-              <div class="question-meta">
-                <span
-                  class="tag"
-                  id="questionTrackTag"
-                >Data Analysis</span>
-                <span class="tag">Behavioral & Technical</span>
-              </div>
-
-
-              <h2 id="questionTitle">
-                Loading question...
-              </h2>
-
-
-              <div
-                class="hint"
-                id="questionHint"
-              >
-                Tip: Structure your answer using the STAR method or clear technical steps.
-              </div>
-
-
-              <div class="answer-box">
-
-                <textarea
-                  id="userAnswer"
-                  placeholder="Type your structured answer here..."
-                ></textarea>
-
-                <div class="answer-meta">
-                  <span>Press Submit when you are ready to move forward.</span>
-                  <span id="charCount">0 characters</span>
-                </div>
-
-              </div>
-
-
-              <div
-                class="follow-up hidden"
-                id="followUpBox"
-              >
-                <strong>Follow-up consideration:</strong>
-                <span id="followUpText"></span>
-              </div>
-
-            </div>
-
-
-
-            <div class="interview-actions">
-
-              <div class="action-left">
-                <button
-                  class="btn btn-secondary"
-                  onclick="skipQuestion()"
-                >
-                  Skip Question
-                </button>
-              </div>
-
-
-              <div class="action-right">
-                <button
-                  class="btn btn-primary"
-                  onclick="submitAnswer()"
-                >
-                  Submit & Next →
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- =================================================
-               RESULTS SCREEN (HIDDEN BY DEFAULT)
-          ================================================== -->
-
-          <div
-            class="results hidden"
-            id="resultsScreen"
-          >
-
-            <div class="results-hero">
-
-              <div
-                class="score-ring"
-                id="scoreRing"
-              >
-                <div class="score-ring-inner">
-                  <strong id="finalScoreText">0%</strong>
-                  <span>Overall Score</span>
-                </div>
-              </div>
-
-
-              <div>
-                <h2 id="resultsTitle">Interview Complete!</h2>
-                <p id="resultsSubtitle">
-                  Here is a comprehensive breakdown of your performance across all answered questions.
-                </p>
-              </div>
-
-            </div>
-
-
-
-            <div class="results-grid">
-
-
-              <div class="result-card">
-
-                <h3>Skill Competency Breakdown</h3>
-
-                <div class="skill">
-                  <div class="skill-head">
-                    <span>Technical Depth</span>
-                    <span id="scoreTech">85%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div
-                      class="skill-fill"
-                      id="fillTech"
-                      style="width: 85%;"
-                    ></div>
-                  </div>
-                </div>
-
-
-                <div class="skill">
-                  <div class="skill-head">
-                    <span>Communication & Clarity</span>
-                    <span id="scoreComm">78%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div
-                      class="skill-fill"
-                      id="fillComm"
-                      style="width: 78%;"
-                    ></div>
-                  </div>
-                </div>
-
-
-                <div class="skill">
-                  <div class="skill-head">
-                    <span>Problem Solving Structure</span>
-                    <span id="scoreStruct">90%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div
-                      class="skill-fill"
-                      id="fillStruct"
-                      style="width: 90%;"
-                    ></div>
-                  </div>
-                </div>
-
-              </div>
-
-
-
-              <div class="result-card">
-
-                <h3>Key Evaluator Insights</h3>
-
-                <div
-                  class="insight-list"
-                  id="insightList"
-                >
-                  <div class="insight">
-                    💡 Strong structured framework used for tackling open-ended scenarios.
-                  </div>
-                  <div class="insight">
-                    ⚡ Consider providing more concrete metrics or numerical examples in answers.
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-
-
-            <div class="result-card" style="margin-top: 17px;">
-              <h3>Detailed Session Transcript</h3>
-              <div
-                class="transcript"
-                id="transcriptContainer"
-              ></div>
-            </div>
-
-
-
-            <div class="results-actions">
-
-              <button
-                class="btn btn-primary"
-                onclick="resetApp()"
-              >
-                Start New Interview
-              </button>
-
-              <button
-                class="btn btn-secondary"
-                onclick="exportTranscript()"
-              >
-                Download Summary
-              </button>
-
-            </div>
-
-
-
-            <!-- HISTORY SECTION -->
-
-            <div class="history">
-
-              <h3>Recent Interview History</h3>
-
-              <div
-                id="historyList"
-                class="history-empty"
-              >
-                No past interview records found in local storage.
-              </div>
-
-            </div>
-
-          </div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InterviewPro Studio - Tech Career Preparation</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg-main: #f8fafc;
+      --surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+
+    .status {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .field {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    button.track {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button.track:hover {
+      border-color: var(--primary);
+    }
+
+    button.track.active {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    button.track strong {
+      display: block;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    button.track span {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .setup-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .interview-rules {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Interview Screen styles */
+    .interview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress {
+      width: 200px;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    .timer {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .timer.warning { border-color: #f59e0b; color: #d97706; }
+    .timer.danger { border-color: #ef4444; color: #dc2626; }
+
+    .question-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .dot.current {
+      background: var(--primary);
+      color: white;
+    }
+
+    .dot.done {
+      background: #bfdbfe;
+      color: var(--primary-dark);
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question-meta {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .hint {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .answer-box textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .answer-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .follow-up {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      font-size: 0.875rem;
+    }
+
+    .interview-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Results Screen */
+    .results-hero {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .score-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) var(--score-angle, 0deg), var(--border) 0deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-ring-inner {
+      width: 80px;
+      height: 80px;
+      background: var(--surface);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-ring-inner strong {
+      font-size: 1.25rem;
+    }
+
+    .score-ring-inner span {
+      font-size: 0.625rem;
+      color: var(--text-muted);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .skill {
+      margin-bottom: 1rem;
+    }
+
+    .skill-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .insight {
+      font-size: 0.875rem;
+      padding: 0.50rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .insight:last-child {
+      border-bottom: none;
+    }
+
+    .transcript {
+      max-height: 250px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      background: #f8fafc;
+    }
+
+    .transcript-item {
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .transcript-q {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .transcript-a {
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .history {
+      margin-top: 2rem;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: var(--surface);
+      font-size: 0.875rem;
+    }
+
+    .history-empty {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .colab-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .colab-link:hover {
+      text-decoration: underline;
+    }
+
+    @media(max-width: 768px) {
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .results-hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">InterviewPro Studio</div>
+    <div class="status" id="appStatus">Ready to practice</div>
+  </header>
+
+  <main>
+    <section id="app">
+      
+      <!-- =================================================
+          SETUP SCREEN
+      ================================================== -->
+      <div class="card" id="setupScreen">
+        <h2>Configure Your Mock Interview</h2>
+        <p>Select your target technical domain, question parameters, and launch your automated assessment session.</p>
+
+        <div class="field">
+          <label for="candidateName">Candidate Name</label>
+          <input type="text" id="candidateName" placeholder="e.g., Alex Morgan">
         </div>
 
+        <div class="field">
+          <label for="targetRole">Target Role / Company Focus</label>
+          <input type="text" id="targetRole" placeholder="e.g., Senior Software Engineer / Data Scientist">
+        </div>
+
+        <div class="field">
+          <label>Select Track</label>
+          <div class="tracks-grid">
+            <button class="track active" data-track="Data Analysis" onclick="selectTrack(this)">
+              <strong>Data Analysis</strong>
+              <span>SQL, data cleaning, metrics, and business insights.</span>
+            </button>
+
+            <button class="track" data-track="Python & Algorithms" onclick="selectTrack(this)">
+              <strong>Python & Algorithms</strong>
+              <span>Core language features, data structures, and problem solving. Includes coding practice.</span>
+              <a href="https://colab.research.google.com/drive/1Rnn-rusQLB-1YVbPYLtmLZ3gFsyO_LGx?usp=sharing" target="_blank" class="colab-link" onclick="event.stopPropagation()">🔗 Open Colab Workbook</a>
+            </button>
+
+            <button class="track" data-track="Generative AI & LLMs" onclick="selectTrack(this)">
+              <strong>Generative AI & LLMs</strong>
+              <span>Prompt engineering, RAG, fine-tuning, and applications.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="questionCount">Number of questions</label>
+          <select id="questionCount">
+            <option value="3">3 Questions (Quick)</option>
+            <option value="5" selected>5 Questions (Standard)</option>
+            <option value="8">8 Questions (Deep Dive)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="timePerQuestion">Time per question</label>
+          <select id="timePerQuestion">
+            <option value="60">1 Minute</option>
+            <option value="120" selected>2 Minutes</option>
+            <option value="180">3 Minutes</option>
+          </select>
+        </div>
+
+        <div class="setup-footer">
+          <div class="interview-rules">
+            • Answer each question thoughtfully within the time limit.<br>
+            • Get immediate feedback and performance scores upon completion.
+          </div>
+          <button class="btn btn-primary" onclick="startInterview()">
+            Start Interview Session →
+          </button>
+        </div>
+      </div>
+
+      <!-- =================================================
+          INTERVIEW SCREEN (HIDDEN BY DEFAULT)
+      ================================================== -->
+      <div class="interview hidden" id="interviewScreen">
+        <div class="interview-top">
+          <div>
+            <div class="progress-info">
+              <span id="progressText">Question 1 of 5</span>
+              <span id="progressPercent">20%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+          <div class="timer" id="timerBox">
+            <small>Time Remaining</small>
+            <strong id="timerText">02:00</strong>
+          </div>
+        </div>
+
+        <div class="question-dots" id="questionDots"></div>
+
+        <div class="question-card">
+          <div class="question-meta">
+            <span class="tag" id="questionTrackTag">Data Analysis</span>
+            <span class="tag">Behavioral & Technical</span>
+          </div>
+
+          <h2 id="questionTitle">Loading question...</h2>
+
+          <div class="hint" id="questionHint">
+            Tip: Structure your answer using clear technical steps or code snippets.
+          </div>
+
+          <div class="answer-box">
+            <textarea id="userAnswer" placeholder="Type your structured answer or code solution here..."></textarea>
+            <div class="answer-meta">
+              <span>Press Submit when you are ready to move forward.</span>
+              <span id="charCount">0 characters</span>
+            </div>
+          </div>
+
+          <div class="follow-up hidden" id="followUpBox">
+            <strong>Follow-up consideration:</strong>
+            <span id="followUpText"></span>
+          </div>
+        </div>
+
+        <div class="interview-actions">
+          <div class="action-left">
+            <button class="btn btn-secondary" onclick="skipQuestion()">
+              Skip Question
+            </button>
+          </div>
+          <div class="action-right">
+            <button class="btn btn-primary" onclick="submitAnswer()">
+              Submit & Next →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+          RESULTS SCREEN (HIDDEN BY DEFAULT)
+      ================================================== -->
+      <div class="results hidden" id="resultsScreen">
+        <div class="results-hero">
+          <div class="score-ring" id="scoreRing">
+            <div class="score-ring-inner">
+              <strong id="finalScoreText">0%</strong>
+              <span>Overall Score</span>
+            </div>
+          </div>
+          <div>
+            <h2 id="resultsTitle">Interview Complete!</h2>
+            <p id="resultsSubtitle">
+              Here is a comprehensive breakdown of your performance across all answered questions.
+            </p>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-card">
+            <h3>Skill Competency Breakdown</h3>
+            <div class="skill">
+              <div class="skill-head">
+                <span>Technical Depth</span>
+                <span id="scoreTech">85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" id="fillTech" style="width: 85%;"></div>
+              </div>
+            </div>
+            <div class="skill">
+              <div class="skill-head">
+                <span>Communication & Clarity</span>
+                <span id="scoreComm">78%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" id="fillComm" style="width: 78%;"></div>
+              </div>
+            </div>
+            <div class="skill">
+              <div class="skill-head">
+                <span>Problem Solving Structure</span>
+                <span id="scoreStruct">90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" id="fillStruct" style="width: 90%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <h3>Key Evaluator Insights</h3>
+            <div class="insight-list" id="insightList">
+              <div class="insight">
+                💡 Strong structured framework used for tackling open-ended scenarios.
+              </div>
+              <div class="insight">
+                ⚡ Consider providing more concrete metrics or code optimizations in answers.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card" style="margin-top: 17px;">
+          <h3>Detailed Session Transcript</h3>
+          <div class="transcript" id="transcriptContainer"></div>
+        </div>
+
+        <div class="results-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+          <button class="btn btn-primary" onclick="resetApp()">
+            Start New Interview
+          </button>
+          <button class="btn btn-secondary" onclick="exportTranscript()">
+            Download Summary
+          </button>
+        </div>
+
+        <!-- HISTORY SECTION -->
+        <div class="history">
+          <h3>Recent Interview History</h3>
+          <div id="historyList" class="history-empty">
+            No past interview records found in local storage.
+          </div>
+        </div>
       </div>
 
     </section>
-
   </main>
 
-
+  <!-- =========================================================
+      FOOTER
+  ========================================================== -->
+  <footer>
+    <div class="container">
+      <p>© 2026–2027 InterviewPro Studio. Built for advanced tech career preparation.</p>
+    </div>
+  </footer>
 
   <!-- =========================================================
-       FOOTER
+      JAVASCRIPT APPLICATION LOGIC
   ========================================================== -->
-
-<footer>
-  <div class="container">
-    <p>© 2026–2027 InterviewPro Studio. Built for advanced tech career preparation.</p>
-  </div>
-</footer>
-
-
-
-  <!-- =========================================================
-       JAVASCRIPT APPLICATION LOGIC
-  ========================================================== -->
-
   <script>
-
     /* --- Application State --- */
     let selectedTrackName = "Data Analysis";
     let currentQuestionIndex = 0;
@@ -439,27 +759,27 @@
       ],
       "Python & Algorithms": [
         {
-          title: "What is the difference between a list and a tuple in Python, and under what circumstances should you use each?",
-          hint: "Discuss mutability, memory allocation, and hashability.",
-          followUp: "Can a tuple contain a mutable object like a list? What are the implications?"
+          title: "Write a Python function to find the first non-repeating character in a string and explain its time complexity.",
+          hint: "Referencing Colab workbook concepts: Use a frequency counting dictionary or collections.Counter.",
+          followUp: "What is the time and space complexity of your approach?"
+        },
+        {
+          title: "How would you move all zeros to the end of a list in-place while maintaining the relative order of non-zero elements?",
+          hint: "Practice problem from Colab workbook: Use a two-pointer approach or position index tracker.",
+          followUp: "How does this algorithm optimize memory overhead compared to creating a secondary list?"
+        },
+        {
+          title: "Write a Python function to check if two given strings are valid anagrams without utilizing built-in sort functions.",
+          hint: "Colab problem: Use a character count dictionary tracker to compare frequencies.",
+          followUp: "How would your solution behave if the strings contained Unicode or uppercase characters?"
         },
         {
           title: "Explain how Python manages memory through reference counting and garbage collection.",
-          hint: "Mention the role of the sys.getrefcount() and the cyclic garbage collector (gc module).",
+          hint: "Mention the role of sys.getrefcount() and the cyclic garbage collector (gc module).",
           followUp: "How can circular references cause memory leaks in long-running Python services?"
         },
         {
-          title: "How would you optimize a Python function that processes a massive text file line by line?",
-          hint: "Discuss generators, yield statements, and chunked reading instead of loading the whole file into RAM.",
-          followUp: "What built-in modules can assist with parallelizing text processing tasks?"
-        },
-        {
-          title: "Explain the concept of decorators in Python and provide a practical use case.",
-          hint: "Functions taking functions as arguments; common uses include logging, caching, or access control.",
-          followUp: "How do you preserve function metadata (like __name__) when writing a custom decorator?"
-        },
-        {
-          title: "How do dictionary lookups achieve O(1) average time complexity?",
+          title: "How do dictionary lookups achieve O(1) average time complexity in Python?",
           hint: "Discuss hash functions, hash tables, and collision resolution techniques.",
           followUp: "What happens to time complexity in the worst-case collision scenario?"
         }
@@ -494,15 +814,6 @@
     };
 
     /* --- Navigation Helpers --- */
-    function scrollToApp() {
-      document.getElementById("app").scrollIntoView({ behavior: "smooth" });
-    }
-
-    function showHowItWorks() {
-      alert("InterviewPro simulates live technical & behavioral interviews for 2026-27 roles. Choose your track, configure question counts, answer within timer bounds, and receive detailed evaluation feedback instantly.");
-    }
-
-    /* --- Setup Track Selection --- */
     function selectTrack(buttonElement) {
       document.querySelectorAll(".track").forEach(btn => btn.classList.remove("active"));
       buttonElement.classList.add("active");
@@ -511,7 +822,6 @@
 
     /* --- Start Interview Session --- */
     function startInterview() {
-      const candidateName = document.getElementById("candidateName").value.trim() || "Candidate";
       const targetRole = document.getElementById("targetRole").value.trim() || selectedTrackName;
       const countVal = parseInt(document.getElementById("questionCount").value, 10);
       const timeVal = parseInt(document.getElementById("timePerQuestion").value, 10);
@@ -519,14 +829,12 @@
       totalTimeAllowed = timeVal;
       timeLeft = timeVal;
 
-      // Select and slice questions based on user config
       let pool = questionDatabase[selectedTrackName] || questionDatabase["Data Analysis"];
       questionsList = pool.slice(0, countVal);
       userAnswers = new Array(questionsList.length).fill("");
 
       currentQuestionIndex = 0;
 
-      // Toggle screens
       document.getElementById("setupScreen").classList.add("hidden");
       document.getElementById("resultsScreen").classList.add("hidden");
       document.getElementById("interviewScreen").classList.remove("hidden");
@@ -560,16 +868,13 @@
       document.getElementById("questionTrackTag").textContent = selectedTrackName;
       document.getElementById("userAnswer").value = userAnswers[currentQuestionIndex] || "";
 
-      // Progress bar update
       const percent = Math.round(((currentQuestionIndex) / total) * 100);
       document.getElementById("progressText").textContent = `Question ${currentQuestionIndex + 1} of ${total}`;
       document.getElementById("progressPercent").textContent = `${percent}%`;
       document.getElementById("progressBar").style.width = `${percent}%`;
 
-      // Character count update
       updateCharCount();
 
-      // Follow up display
       const followBox = document.getElementById("followUpBox");
       if (q.followUp) {
         document.getElementById("followUpText").textContent = q.followUp;
@@ -578,7 +883,6 @@
         followBox.classList.add("hidden");
       }
 
-      // Update dot indicators
       const dots = document.querySelectorAll(".dot");
       dots.forEach((dot, idx) => {
         dot.classList.remove("current");
@@ -589,7 +893,6 @@
         }
       });
 
-      // Reset timer for question
       timeLeft = totalTimeAllowed;
       updateTimerDisplay();
     }
@@ -684,16 +987,13 @@
       document.getElementById("resultsScreen").classList.remove("hidden");
       document.getElementById("appStatus").textContent = "Session completed successfully";
 
-      // Compute mock score based on answers length and content richness
       let totalChars = userAnswers.reduce((acc, ans) => acc + (ans ? ans.trim().length : 0), 0);
       let baseScore = Math.min(96, Math.max(55, Math.round(totalChars / (questionsList.length * 4))));
       if (isNaN(baseScore)) baseScore = 72;
 
-      // Update UI score elements
       document.getElementById("finalScoreText").textContent = `${baseScore}%`;
       document.getElementById("scoreRing").style.setProperty('--score-angle', `${(baseScore / 100) * 360}deg`);
 
-      // Sub-scores
       let techScore = Math.min(98, baseScore + Math.floor(Math.random() * 8));
       let commScore = Math.min(98, baseScore - Math.floor(Math.random() * 6));
       let structScore = Math.min(99, baseScore + Math.floor(Math.random() * 5));
@@ -707,7 +1007,6 @@
       document.getElementById("scoreStruct").textContent = `${structScore}%`;
       document.getElementById("fillStruct").style.width = `${structScore}%`;
 
-      // Build Transcript view
       const transcriptContainer = document.getElementById("transcriptContainer");
       transcriptContainer.innerHTML = "";
 
@@ -724,12 +1023,11 @@
         item.innerHTML = `
           <div class="transcript-q">Q${idx + 1}: ${escapeHtml(q.title)}</div>
           <div class="transcript-a"><strong>Your Answer:</strong> ${userAnsText}</div>
-          <div class="answer-score">Evaluated Score: ${randomAnsScore}%</div>
+          <div class="answer-score" style="font-size:0.8125rem; color:var(--primary); margin-top:0.25rem;">Evaluated Score: ${randomAnsScore}%</div>
         `;
         transcriptContainer.appendChild(item);
       });
 
-      // Save to localStorage History
       saveToHistory(selectedTrackName, baseScore, questionsList.length);
       loadHistory();
     }
@@ -755,7 +1053,7 @@
       };
 
       history.unshift(newRecord);
-      if (history.length > 5) history = history.slice(0, 5); // Keep last 5
+      if (history.length > 5) history = history.slice(0, 5);
 
       try {
         localStorage.setItem("interviewPro_history", JSON.stringify(history));
@@ -786,9 +1084,9 @@
             <strong>${escapeHtml(item.track)} Mock Interview</strong>
             <span>Completed on ${item.date} • ${item.questionsCount} Questions</span>
           </div>
-          <div class="history-score">${item.score}%</div>
+          <div class="history-score"><strong>${item.score}%</strong></div>
         `;
-        historyListEl.appendChild(div);
+        historyListEl.issuerHTML ? null : historyListEl.appendChild(div);
       });
     }
 
@@ -810,13 +1108,10 @@
       URL.revokeObjectURL(url);
     }
 
-    // Load initial history on page load
     window.addEventListener("DOMContentLoaded", () => {
       loadHistory();
     });
-
   </script>
-
 </body>
 </html>
 
